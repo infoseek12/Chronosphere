@@ -1,0 +1,92 @@
+//Global styles
+html, body, #map {
+  height: 100%;
+  margin: 0px;
+}
+
+input{
+  color: rgb(5, 4, 16);
+}
+
+body{
+  background-color: rgb(5, 4, 16);
+
+  p, span{
+    color: #FFFFF5;
+  }
+}
+
+//Time zone bar at top
+.timeZoneSelector{
+  display: flex;
+  justify-content: space-between;
+  height: 25px;
+
+  .timezone-offset{
+    width: 200px;
+    border-left: 1px solid rgb(28,99,160);
+    border-top: 2px solid rgb(28,99,160);
+  }
+
+  .timeDisplay{ //Current time
+    align-self: center;
+    margin-top: 25px;
+
+    span{
+      margin: 0 3px;
+      font-weight: bold;
+    }
+  }
+
+  .timeReset{
+    width: 200px;
+    border-right: 1px solid rgb(28,99,160);
+    border-top: 2px solid rgb(28,99,160);
+  }
+}
+
+
+//Time selection widget
+.timeControls{
+  display: flex;
+  justify-content: space-around;
+  height: 15px;
+  padding: 10px 0;
+  font-size: 18px;
+  
+
+  p{
+    padding: 0 12px;
+    font-weight: bold;
+  }
+
+  input{
+    background-size: 15px 15px !important;
+    background-repeat: no-repeat !important;
+    background-color: #fffff5 !important;
+    border-radius: 6px;
+  }
+
+  .reverse{
+    input{
+      background-position: left center !important;
+      padding-left: 18px;
+    }
+  }
+
+  .advance{
+    input{
+      background-position: right center !important;
+      padding-right: 18px;
+    }
+  }
+
+  .mapTime{//Present time of map
+    margin-top: 0px;
+  }
+}
+
+.leaflet-tile { //Hack to fix map tiles
+  width: 257px !important;
+  height: 257px !important;
+}
