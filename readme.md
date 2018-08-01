@@ -1,16 +1,15 @@
 ## Summary
-***
 Chrono-Sphere is an initial attempt to represent different kinds of information about Earth, and the solar system, at any given point in time. The visuals are intended to be informative rather than literally accurate while leaning towards reality when possible. However, where information is displayed the intent is to be accurate.
 
 ## "Architecture"
-***
 Chrono-Sphere is built around a [singleton](https://en.wikipedia.org/wiki/Singleton_pattern) object named chronoSphere. Temporal widgets, like moon phases and solar system orbits, are modules attached to the chronoSphere object. The primary map is not currently factored as an independent module.
 
 Code taken from various opensource projects are combined, and to varying degrees, refactored (hopefully all are in the credits below, please let me know if I missed anyone). Updates are triggered every second and time calculations are done with the [MomentJS Library](https://momentjs.com). 
 
 ## "Accuracy"
-***
+
 ### Known Inaccuracies
+***
 The timezone selector is sometimes off by an hour, I believe this is due to daylight savings time not being factored in.
 
 The solar terminator is not sized correctly at all zoom levels, the gradient is off, and there are sometimes seams between the map tiles.
@@ -26,7 +25,6 @@ The project is still at a very initial stage. Pull requests are very welcome.
 Switch to Mapbox GL JS. The platform is based on WebGL and more performant; and current bugs, like seams in the terminator line between map tiles, should be relatively straightforward to address.
 
 ## ToDo
-***
 ### General
 Write tests
 Plugin system to better modulize temporal widgets
@@ -48,7 +46,6 @@ Solar weather (Note: use [this source of data](https://www.spaceweatherlive.com)
 [significant events]() from Wikipedia
 
 ## Credits
-***
 The map is built on top of [Leaflet](https://leafletjs.com)
 The daytime satellite images and all the satellite image hosting is provided by [MapBox](https://www.mapbox.com/)
 The nighttime satellite images are from [NASA's Black Marble project](https://earthobservatory.nasa.gov/Features/NightLights/page3.php)
@@ -63,6 +60,7 @@ The SVG's for the phases of the moon are from [Open Clip Art](https://openclipar
 
 ### NPM and WebPack Plugins:
 [autoprefixer](https://www.npmjs.com/package/autoprefixer),[babel-core](https://www.npmjs.com/package/babel-core),[babel-loader](https://www.npmjs.com/package/babel-loader),[babel-preset-env](https://www.npmjs.com/package/babel-preset-env),[file-loader](https://www.npmjs.com/package/file-loader),[css-loader](https://www.npmjs.com/package/css-loader),[mini-css-extract-plugin](https://www.npmjs.com/package/mini-css-extract-plugin),[node-sass](https://www.npmjs.com/package/node-sass),[postcss-loader](https://www.npmjs.com/package/postcss-loader),[sass-loader](https://www.npmjs.com/package/sass-loader),[style-loader](https://www.npmjs.com/package/style-loader),[webpack](https://www.npmjs.com/package/webpack),[webpack-cli](https://www.npmjs.com/package/webpack-cli)
+
 
 
 *Released under the MIT License*
