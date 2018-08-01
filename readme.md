@@ -1,4 +1,4 @@
-###Summary
+###Summary###
 ***
 Chrono-Sphere is an initial attempt to represent different kinds of information about Earth, and the solar system, at any given point in time. The visuals are intended to be informative rather than literally accurate while leaning towards reality when possible. However, where information is displayed the intent is to be accurate.
 
