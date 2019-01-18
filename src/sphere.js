@@ -19,8 +19,16 @@ import "./js/drawTerminator.js";
 
 import "./js/loadInitialMap.js";
 
+import "./js/sunCalc.js";
+
+import "./js/planetaryOrbits.js";
+
 import "./js/changeTime.js";
 
 import "./js/eventHandlers.js";
 
-setInterval(function(){ chronoSphere.updateTimeDisplay(); }, 1000);
+chronoSphere.updateTime();
+setInterval(function(){ chronoSphere.updateTime(); }, 1000);
+
+chronoSphere.updateDisplay();
+setInterval(function(){ chronoSphere.updateDisplay(); }, 60000);

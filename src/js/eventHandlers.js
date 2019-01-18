@@ -3,6 +3,7 @@
 document.getElementsByClassName("timeReset")[0].addEventListener("click",
   function() {
     chronoSphere.resetToPresent();
+    console.log;
   }, false);
 
 

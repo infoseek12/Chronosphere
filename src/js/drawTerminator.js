@@ -97,11 +97,11 @@ let ExtendMethods = {
       if (geom.length > 4 && chronoSphere.showTerminator == true) {
         ctx.beginPath();
         for (let o = 1; o < 12; o++) {
-          ctx.strokeStyle = "rgba(5, 4, 16, " + 0.007 * o + ")";
-          ctx.lineWidth = o * (zCoeff / (zCoeff * 0.2)) * 0.5;
+          ctx.strokeStyle = "rgba(5, 4, 16, " + (0.01 * o) + ")";
+          ctx.lineWidth = ((o * (zCoeff / 2)) * .5);
           ctx.moveTo(
             terminatorClip.x[1],
-            terminatorClip.y[1] + reverseTerminator * o
+            terminatorClip.y[1] + (reverseTerminator * o)
           );
 
           for (let p = 2; p <= terminatorClip.x.length; p++) {

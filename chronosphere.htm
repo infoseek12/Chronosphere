@@ -3,12 +3,14 @@
   <head>
     <meta charset=UTF-8 />
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link rel="shortcut icon" type="image/png" href="./assets/img/globe.png"/>
     <link rel="stylesheet" type="text/css" href="./dist/style.css">
     <title>Chronosphere</title>
   </head>
-  <body>
-    
+
+  <body>    
     <div class="timeZoneSelector">
       <select class="timezone-offset" onchange="chronoSphere.timezoneUTCHoursOffset = parseInt(this.value);">//FIX causes bug when added as event listener externally
         <option value="" selected disabled hidden>Please Select New Timezone</option>
@@ -69,8 +71,39 @@
       </div>
     </div>
 
+
     <div id="map"></div>
 
+
+    <div class = "astronomy">
+      <div class="moonPhase">
+        <h2>Moon Phase</h2>
+        <img 
+        src="" 
+        alt="current phase of the moon"
+        id="moon"
+        />
+      </div>
+
+      <div class="solarSystem">
+        <h2>Planet Positions</h2>
+        <canvas id="LAYER_BACKGROUND_T6"  width="400" height="400">
+          Your browser does not support HTML Canvas. Please update your browser.
+        </canvas>
+        <canvas id="LAYER_FOREGROUND_T6" width="400" height="400"></canvas>
+
+        <div id="preload-image">
+          <img src="./assets/img/planets/venus.svg" id="venus-icon">
+          <img src="./assets/img/planets/earth.svg" id="earth-icon">
+          <img src="./assets/img/planets/mars.svg" id="mars-icon">
+          <img src="./assets/img/planets/jupiter.svg" id="jupiter-icon">
+          <img src="./assets/img/planets/saturn.svg" id="saturn-icon">
+          <img src="./assets/img/planets/neptune.svg" id="neptune-icon">
+        </div>
+      </div>
+    </div>
+
     <script type="text/javascript" src="./dist/sphere.js"></script>
+
   </body>
 </html>
