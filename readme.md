@@ -1,8 +1,8 @@
 ## Summary
-Chrono-Sphere is an initial attempt to represent different kinds of information about the Earth and the solar system, at any given point in time. The visuals are intended to be informative rather than literally accurate while leaning towards reality when possible. For instance, the positions of the planets are correct but some of them have been brought closer to the sun to fit in the model.
+Chronosphere is an initial attempt to represent different kinds of information about the Earth and the solar system, at any given point in time. The visuals are intended to be informative rather than literally accurate while leaning towards reality when possible. For instance, the positions of the planets are correct but some of them have been brought closer to the sun to fit in the model.
 
 ## Architecture
-Chrono-Sphere is built around a [singleton](https://en.wikipedia.org/wiki/Singleton_pattern) object named chronoSphere. "Temporal widgets", like moon phases and solar system orbits, are modules attached to the chronoSphere object. The primary map is not currently factored as an independent module.
+Chronosphere is built around a [singleton](https://en.wikipedia.org/wiki/Singleton_pattern) object named chronoSphere. "Temporal widgets", like moon phases and solar system orbits, are modules attached to the chronoSphere object. The primary map is not currently factored as an independent module.
 
 Code taken from various opensource projects are combined, and to varying degrees, refactored. Updates are triggered every second and time calculations are done with the [MomentJS Library](https://momentjs.com). 
 
@@ -25,7 +25,7 @@ The size of the planets is not proportioned accurately, nor are their orbits. Th
 ***
 The project is still at a very initial stage and pull requests are very welcome.
 
-## ToDo
+## Todo
 ### General
 * Write tests
 * Plugin system to better modulize temporal widgets
