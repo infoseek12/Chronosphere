@@ -13,16 +13,19 @@ http://www.planetaryorbits.com/tutorial-javascript-orbit-simulation.html
 //http://space.jpl.nasa.gov/
 //NOTE: The First Point of Aries in the NASA simulation is due north!
 let newdd, newmm, newyyyy, aGen, eGen, iGen, WGen, wGen, LGen, MGen, EGen, trueAnomalyArgGen, K, nGen, rGen, xGen, yGen, zGen, i, m;
+let offsetX, offsetY;
+let planetNames = [];
+let offsetPlanetsX = 35;
 
-const T6 = {
+let T6 = {
 	//Define background canvas
 	canvasbackground:document.getElementById('LAYER_BACKGROUND_T6'), //Grab the HTML5 Background Canvas (will only be drawn once)
 	contextbackground:null,
 	//Define foreground canvas
 	canvasforeground:document.getElementById('LAYER_FOREGROUND_T6'), //Grab the HTML5 Foreground Canvas (elements on this canvas will be rendered every frame; moving objects)
 	contextforeground:null,
-	width:400,
-	height:400,
+	width:450,
+	height:450,
 	
 	julianCenturyInJulianDays:36525,
 	julianEpochJ2000:2451545.0,
@@ -100,6 +103,13 @@ planetRates: [
 	neptuneScaleDivider:8.7
 }
 
+
+function findOffset(){
+  var BB = T6.canvasforeground.getBoundingClientRect();
+  offsetX = BB.left;
+  offsetY = BB.top;        
+}
+
 function initPlanets(){
 	T6.contextbackground = T6.canvasbackground.getContext('2d'); //Need the context to be able to draw on the canvas
 	T6.contextforeground = T6.canvasforeground.getContext('2d'); //Need the context to be able to draw on the canvas
@@ -108,6 +118,12 @@ function initPlanets(){
 	T6.height = T6.canvasforeground.height;
 
 	updatePlanetTime();
+
+  findOffset();
+  window.onscroll = (e) => findOffset();
+  window.onresize = (e) => findOffset();
+
+  T6.canvasforeground.onmousemove = (e) => displayToolTip(e);
 
 	//Render background once (render the Sun at center)
 	renderBackground_T6();	
@@ -146,7 +162,7 @@ function renderBackground_T6(){
 	
 	//render Sun at center
 	T6.contextbackground.beginPath();
-	T6.contextbackground.arc(T6.width/2, T6.height/2, 10, 0, 2*Math.PI, true); 
+	T6.contextbackground.arc((T6.width/2 + 6) - offsetPlanetsX, (T6.height/2 + 10), 10, 0, 2*Math.PI, true); 
 	T6.contextbackground.fillStyle = 'yellow';
 	T6.contextbackground.fill();
 	T6.contextbackground.closePath();				
@@ -155,45 +171,30 @@ function renderBackground_T6(){
 //RENDER FOREGROUND. INCLUDES ALL DYNAMIC ELEMENTS ON SCREEN.
 function renderForeground_T6(){
 	//Clear the canvas (otherwise there will be "ghosting" on foreground layer)
-	T6.contextforeground.clearRect(0, 0, T6.width, T6.height);	
+	T6.contextforeground.clearRect(0, 0, T6.width, T6.height);
+	let planetLoc = [
+		{planet:"Mercury", x:(T6.width/2)+(T6.xMercury*T6.scale), y:(T6.height/2)-(T6.yMercury*T6.scale), radius:12, id:"mercury-icon"},
+		{planet:"Venus", x:(T6.width/2)+(T6.xVenus*T6.scale), y:(T6.height/2)-(T6.yVenus*T6.scale), radius:12, id:"venus-icon"},
+		{planet:"Earth", x:(T6.width/2)+(T6.xEarth*T6.scale), y:(T6.height/2)-(T6.yEarth*T6.scale), radius:18, id:"earth-icon"},
+		{planet:"Mars", x:(T6.width/2)+(T6.xMars*T6.scale), y:(T6.height/2)-(T6.yMars*T6.scale), radius:15, id:"mars-icon"},
+		{planet:"Jupiter", x:(T6.width/2)+(T6.xJupiter*T6.scale/T6.jupiterScaleDivider), y:(T6.height/2)-(T6.yJupiter*T6.scale/T6.jupiterScaleDivider), radius:20, id:"jupiter-icon"},
+		{planet:"Saturn", x:(T6.width/2)+(T6.xSaturn*T6.scale/T6.saturnScaleDivider), y:(T6.height/2)-(T6.ySaturn*T6.scale/T6.saturnScaleDivider), radius:27, id:"saturn-icon"},
+		{planet:"Uranus", x:(T6.width/2)+(T6.xUranus*T6.scale/T6.uranusScaleDivider), y:(T6.height/2)-(T6.yUranus*T6.scale/T6.uranusScaleDivider), radius:15, id:"uranus-icon"},
+		{planet:"Neptune", x:(T6.width/2)+(T6.xNeptune*T6.scale/T6.neptuneScaleDivider), y:(T6.height/2)-(T6.yNeptune*T6.scale/T6.neptuneScaleDivider), radius:10, id:"neptune-icon"}
+	];
 
 	const load = () => {
-  let c = document.getElementById("LAYER_FOREGROUND_T6");
-  let ctx = c.getContext("2d");
-	//INNER PLANETS
-	//Render planet Mercury
-	T6.contextforeground.beginPath();
-	T6.contextforeground.arc((T6.width/2)+(T6.xMercury*T6.scale), (T6.height/2)-(T6.yMercury*T6.scale), (3+(0.5*(4879/10000))), 0, 2*Math.PI, true); 
-	T6.contextforeground.fillStyle = 'Chocolate';
-	T6.contextforeground.fill();
-	T6.contextforeground.closePath();				
-	//Render planet Venus
-	let img = document.getElementById("venus-icon");
-  ctx.drawImage(img, (T6.width/2)+(T6.xVenus*T6.scale), (T6.height/2)-(T6.yVenus*T6.scale), 15, 15); 		
-	//Render planet Earth
-  img = document.getElementById("earth-icon");
-  ctx.drawImage(img, (T6.width/2)+(T6.xEarth*T6.scale), (T6.height/2)-(T6.yEarth*T6.scale), 15, 15); 
-	//Render planet Mars
-	img = document.getElementById("mars-icon");
-  ctx.drawImage(img, (T6.width/2)+(T6.xMars*T6.scale), (T6.height/2)-(T6.yMars*T6.scale), 15, 15); 
-	
-	//OUTER PLANETS
-	//Render planet Jupiter
-	img = document.getElementById("jupiter-icon");
-  ctx.drawImage(img, (T6.width/2)+(T6.xJupiter*T6.scale/T6.jupiterScaleDivider), (T6.height/2)-(T6.yJupiter*T6.scale/T6.jupiterScaleDivider), 18, 18); 				
-	//Render planet Saturn
-	img = document.getElementById("saturn-icon");
-  ctx.drawImage(img, (T6.width/2)+(T6.xSaturn*T6.scale/T6.saturnScaleDivider), (T6.height/2)-(T6.ySaturn*T6.scale/T6.saturnScaleDivider), 20, 20); 	
-	//Render planet Uranus
-	T6.contextforeground.beginPath();
-	T6.contextforeground.arc((T6.width/2)+(T6.xUranus*T6.scale/T6.uranusScaleDivider), (T6.height/2)-(T6.yUranus*T6.scale/T6.uranusScaleDivider), (4+(0.5*(51118/13000))), 0, 2*Math.PI, true); 
-	T6.contextforeground.fillStyle = 'LightSkyBlue';
-	T6.contextforeground.fill();
-	T6.contextforeground.closePath();	
-	//Render planet Neptune
-	img = document.getElementById("neptune-icon");
-  ctx.drawImage(img, (T6.width/2)+(T6.xNeptune*T6.scale/T6.neptuneScaleDivider), (T6.height/2)-(T6.yNeptune*T6.scale/T6.neptuneScaleDivider), 10, 10); 
-	} 
+	  let c = document.getElementById("LAYER_FOREGROUND_T6");
+	  let ctx = c.getContext("2d");
+	  planetNames = [];
+
+	  for (let i=0; i < planetLoc.length; i++){
+	  	planetNames.push({name:planetLoc[i].planet, x:planetLoc[i].x - offsetPlanetsX, y:planetLoc[i].y, radius:planetLoc[i].radius});
+		  let img = document.getElementById(planetLoc[i].id);
+	    ctx.drawImage(img, planetLoc[i].x - offsetPlanetsX, planetLoc[i].y, planetLoc[i].radius, planetLoc[i].radius);
+	  }
+	}
+
 	load();
   window.onload = load;
 }
@@ -345,6 +346,39 @@ function toRadians_T6(deg){
 
 function round_T6(value, decimals) {
 	return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+}
+
+function displayToolTip(e){
+  e.preventDefault();
+  e.stopPropagation();
+
+  let canvasTXT = T6.canvasforeground.getContext('2d');
+  canvasTXT.fillStyle = "#f7f4ef";
+  canvasTXT.font = "17px 'Open Sans'";
+
+  let mouseX = parseInt(e.clientX - offsetX);
+  let mouseY = parseInt(e.clientY - offsetY);
+
+  renderForeground_T6();
+
+  for(let i = 0; i < planetNames.length; i++){
+
+    let h = planetNames[i];
+    let dx = mouseX-h.x;
+    let dy = mouseY-h.y;
+    let adjustedX = h.x + 2 + h.radius;
+    let adjustedY = h.y + 0 + (h.radius * .9);
+    let sunX = (T6.width/2 + 6) - offsetPlanetsX;
+    let sunY = (T6.height/2 + 10);
+
+    if(dx*dx+dy*dy<h.radius*h.radius){
+      if ((sunX - 50 < adjustedX) && (adjustedX < sunX + 0) && (sunY - 20 < adjustedY) && (adjustedY < sunY)) adjustedY -= 18;
+      if ((sunX - 50 < adjustedX) && (adjustedX < sunX + 0) && (sunY < adjustedY) && (adjustedY < sunY + 20)) adjustedY += 18;
+
+      canvasTXT.fillText(h.name, adjustedX, adjustedY);
+    }
+  }
+
 }
 
 chronoSphere.addInitFunction(initPlanets);
