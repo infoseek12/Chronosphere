@@ -20,8 +20,6 @@ chronoSphere.updateTime = function (){
 }
 
 chronoSphere.updateDisplay = function() {
-  let moonIMG = document.getElementById("moon");
-
   let timeUp = moment(chronoSphere.currentTime);
   timeUp = timeUp.add(chronoSphere.mapTime);
 
@@ -33,11 +31,13 @@ chronoSphere.updateDisplay = function() {
     }
   ).addTo(chronoSphere.map);
 
-  chronoSphere.map.removeLayer(chronoSphere.nightTimeMap);
+  
+  let chronUp = () => {
+    chronoSphere.map.removeLayer(chronoSphere.nightTimeMap);
+    chronoSphere.nightTimeMap = nightTime2;
+  }
 
-  chronoSphere.nightTimeMap = nightTime2;
+  setTimeout(chronUp, 175);
 
-  moonIMG.src = "./assets/img/moon/jpg/" + parseInt((L.SunCalc.getMoonIllumination(timeUp).phase * 35) + 1) + ".jpg";
-
-  chronoSphere.updatePlanets();
+  chronoSphere.runUpdateFunctions();
 };

@@ -14,6 +14,12 @@ L.Icon.Default.mergeOptions({
   shadowUrl: markerShadow
 });
 
+import "./js/core.js";
+
+import "./js/changeTime.js";
+
+import "./js/eventHandlers.js";
+
 import "./js/calculateTerminator.js";
 import "./js/drawTerminator.js";
 
@@ -23,9 +29,7 @@ import "./js/sunCalc.js";
 
 import "./js/planetaryOrbits.js";
 
-import "./js/changeTime.js";
-
-import "./js/eventHandlers.js";
+chronoSphere.runInitFunctions();
 
 chronoSphere.updateTime();
 setInterval(function(){ chronoSphere.updateTime(); }, 1000);

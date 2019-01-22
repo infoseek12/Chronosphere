@@ -14,7 +14,7 @@ http://www.planetaryorbits.com/tutorial-javascript-orbit-simulation.html
 //NOTE: The First Point of Aries in the NASA simulation is due north!
 let newdd, newmm, newyyyy, aGen, eGen, iGen, WGen, wGen, LGen, MGen, EGen, trueAnomalyArgGen, K, nGen, rGen, xGen, yGen, zGen, i, m;
 
-var T6 = {
+const T6 = {
 	//Define background canvas
 	canvasbackground:document.getElementById('LAYER_BACKGROUND_T6'), //Grab the HTML5 Background Canvas (will only be drawn once)
 	contextbackground:null,
@@ -100,9 +100,7 @@ planetRates: [
 	neptuneScaleDivider:8.7
 }
 
-init_T6();
-
-function init_T6(){
+function initPlanets(){
 	T6.contextbackground = T6.canvasbackground.getContext('2d'); //Need the context to be able to draw on the canvas
 	T6.contextforeground = T6.canvasforeground.getContext('2d'); //Need the context to be able to draw on the canvas
 
@@ -114,11 +112,11 @@ function init_T6(){
 	//Render background once (render the Sun at center)
 	renderBackground_T6();	
 	//Start the main loop
-	run_T6();
+	runPlanets();
 }
 
 //Loop Function that runs as fast as possible (logic speed)
-function run_T6(){
+function runPlanets(){
 	updatePlanetTime();
 	//Get Mercury Heliocentric Ecliptic Coordinates
 	T6.orbitalElements = plotPlanet_T6(T6.T,0);T6.xMercury = T6.orbitalElements[0];T6.yMercury = T6.orbitalElements[1];
@@ -160,8 +158,8 @@ function renderForeground_T6(){
 	T6.contextforeground.clearRect(0, 0, T6.width, T6.height);	
 
 	const load = () => {
-  var c = document.getElementById("LAYER_FOREGROUND_T6");
-  var ctx = c.getContext("2d");
+  let c = document.getElementById("LAYER_FOREGROUND_T6");
+  let ctx = c.getContext("2d");
 	//INNER PLANETS
 	//Render planet Mercury
 	T6.contextforeground.beginPath();
@@ -170,21 +168,21 @@ function renderForeground_T6(){
 	T6.contextforeground.fill();
 	T6.contextforeground.closePath();				
 	//Render planet Venus
-	var img = document.getElementById("venus-icon");
+	let img = document.getElementById("venus-icon");
   ctx.drawImage(img, (T6.width/2)+(T6.xVenus*T6.scale), (T6.height/2)-(T6.yVenus*T6.scale), 15, 15); 		
 	//Render planet Earth
-  var img = document.getElementById("earth-icon");
+  img = document.getElementById("earth-icon");
   ctx.drawImage(img, (T6.width/2)+(T6.xEarth*T6.scale), (T6.height/2)-(T6.yEarth*T6.scale), 15, 15); 
 	//Render planet Mars
-	var img = document.getElementById("mars-icon");
+	img = document.getElementById("mars-icon");
   ctx.drawImage(img, (T6.width/2)+(T6.xMars*T6.scale), (T6.height/2)-(T6.yMars*T6.scale), 15, 15); 
 	
 	//OUTER PLANETS
 	//Render planet Jupiter
-	var img = document.getElementById("jupiter-icon");
+	img = document.getElementById("jupiter-icon");
   ctx.drawImage(img, (T6.width/2)+(T6.xJupiter*T6.scale/T6.jupiterScaleDivider), (T6.height/2)-(T6.yJupiter*T6.scale/T6.jupiterScaleDivider), 18, 18); 				
 	//Render planet Saturn
-	var img = document.getElementById("saturn-icon");
+	img = document.getElementById("saturn-icon");
   ctx.drawImage(img, (T6.width/2)+(T6.xSaturn*T6.scale/T6.saturnScaleDivider), (T6.height/2)-(T6.ySaturn*T6.scale/T6.saturnScaleDivider), 20, 20); 	
 	//Render planet Uranus
 	T6.contextforeground.beginPath();
@@ -193,7 +191,7 @@ function renderForeground_T6(){
 	T6.contextforeground.fill();
 	T6.contextforeground.closePath();	
 	//Render planet Neptune
-	var img = document.getElementById("neptune-icon");
+	img = document.getElementById("neptune-icon");
   ctx.drawImage(img, (T6.width/2)+(T6.xNeptune*T6.scale/T6.neptuneScaleDivider), (T6.height/2)-(T6.yNeptune*T6.scale/T6.neptuneScaleDivider), 10, 10); 
 	} 
 	load();
@@ -201,10 +199,10 @@ function renderForeground_T6(){
 }
 
 function getJulianDate_T6(Year,Month,Day){
-	var inputDate = new Date(Year,Month,Math.floor(Day));
-	var switchDate = new Date("1582","10","15");
+	let inputDate = new Date(Year,Month,Math.floor(Day));
+	let switchDate = new Date("1582","10","15");
 
-	var isGregorianDate = inputDate >= switchDate;
+	let isGregorianDate = inputDate >= switchDate;
 
 	//Adjust if B.C.
 	if(Year<0){
@@ -218,8 +216,8 @@ function getJulianDate_T6(Year,Month,Day){
 	}
 
 	//Calculate A & B; ONLY if date is equal or after 1582-Oct-15
-	var A = Math.floor(Year/100); //A
-	var B = 2-A+Math.floor(A/4); //B
+	let A = Math.floor(Year/100); //A
+	let B = 2-A+Math.floor(A/4); //B
 	
 	//Ignore B if date is before 1582-Oct-15
 	if(!isGregorianDate){B=0;}
@@ -288,7 +286,7 @@ function plotPlanet_T6(TGen,planetNumber){
 	trueAnomalyArgGen = (Math.sqrt((1+eGen) / (1-eGen)))*(Math.tan(toRadians_T6(EGen)/2));
 
 	//TRUE ANOMALY (DYNAMIC = CHANGES OVER TIME)
-	K = Math.PI/180.0; //Radian converter variable
+	K = Math.PI/180.0; //Radian converter letiable
 	if(trueAnomalyArgGen<0){ 
 		nGen = 2 * (Math.atan(trueAnomalyArgGen)/K+180); //ATAN = ARCTAN = INVERSE TAN
 	}
@@ -318,10 +316,10 @@ function EccAnom_T6(ec,m,dp) {
 	// ec=eccentricity, m=mean anomaly,
 	// dp=number of decimal places
 
-	var pi=Math.PI, K=pi/180.0;
-	var maxIter=30, i=0;
-	var delta=Math.pow(10,-dp);
-	var E, F;
+	let pi=Math.PI, K=pi/180.0;
+	let maxIter=30, i=0;
+	let delta=Math.pow(10,-dp);
+	let E, F;
 
 	m=m/360.0;
 	m=2.0*pi*(m-Math.floor(m));
@@ -349,4 +347,6 @@ function round_T6(value, decimals) {
 	return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
 }
 
-chronoSphere.updatePlanets = run_T6;
+chronoSphere.addInitFunction(initPlanets);
+
+chronoSphere.addUpdateFunction(runPlanets);

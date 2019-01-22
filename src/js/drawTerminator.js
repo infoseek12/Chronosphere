@@ -110,15 +110,13 @@ let ExtendMethods = {
               p += 1;
               ctx.beginPath();
               ctx.moveTo(
-                terminatorClip.x[p],
-                terminatorClip.y[p] + reverseTerminator * o
+                terminatorClip.x[p], terminatorClip.y[p] + reverseTerminator * o
               );
               p += 1;
               continue;
             }
             ctx.lineTo(
-              terminatorClip.x[p],
-              terminatorClip.y[p] + reverseTerminator * o
+              terminatorClip.x[p], terminatorClip.y[p] + reverseTerminator * o
             );
           }
           ctx.stroke();
