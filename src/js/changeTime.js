@@ -37,7 +37,7 @@ chronoSphere.updateDisplay = function() {
     chronoSphere.nightTimeMap = nightTime2;
   }
 
-  setTimeout(chronUp, 175);
+  setTimeout(chronUp, 250);
 
   chronoSphere.runUpdateFunctions();
 };

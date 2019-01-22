@@ -25,7 +25,7 @@ import "./js/drawTerminator.js";
 
 import "./js/loadInitialMap.js";
 
-import "./js/sunCalc.js";
+import "./js/moonCalc.js";
 
 import "./js/planetaryOrbits.js";
 
