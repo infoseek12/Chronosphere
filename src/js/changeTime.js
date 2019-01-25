@@ -39,5 +39,7 @@ chronoSphere.updateDisplay = function() {
 
   setTimeout(chronUp, 250);
 
+  chronoSphere.datePicker.setDate(timeUp.utcOffset(chronoSphere.timezoneUTCHoursOffset).format("YYYY-MM-DD HH:mm"));
+
   chronoSphere.runUpdateFunctions();
 };

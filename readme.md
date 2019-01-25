@@ -32,7 +32,6 @@ The project is still at a very initial stage and pull requests are very welcome.
 * Improve mobile suppport
 
 ### Time management
-* Add date/time picker
 * Improve timezone selector
 
 ### Satalite Map
@@ -55,6 +54,7 @@ The project is still at a very initial stage and pull requests are very welcome.
 * The phase of the moon is calculated with Vladimir Agafonkin [sunCalc library](https://github.com/mourner/suncalc)
 * The code for calculating the position of the planets is from Chris Jager's [Planetary Orbits](http://www.planetaryorbits.com/tutorial-javascript-orbit-simulation.html)
 * [MomentJS](https://momentjs.com) is used for time calculations
+* [Flatpickr](https://flatpickr.js.org) is used to select dates
 * The SVG's for Venus, Earth, Mars, Jupiter, and Neptune were adapted from the [Tango Desktop project](http://tango.freedesktop.org/Tango_Desktop_Project), Saturn is from [Wikipedia](https://commons.wikimedia.org/wiki/File:Saturn-148300.svg), as is [Uranus](https://commons.wikimedia.org/wiki/File:Uranus2-by_Merlin2525.svg), and [Saturn](https://commons.wikimedia.org/wiki/File:Saturn.svg)
 * The planet glyphs are from [Wikipedia](https://en.wikipedia.org/wiki/Astronomical_symbols#Symbols_for_the_planets)
 * The JPG's currently in use were uploaded by Jay Tanner to [WikiCommons](https://commons.wikimedia.org/wiki/Category:Lunar_phases)

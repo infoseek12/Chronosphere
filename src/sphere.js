@@ -1,9 +1,12 @@
 import "./css/style.css";
 
-import "./settings.js";
-
 import "leaflet";
 import "leaflet/dist/leaflet.css";
+
+import "flatpickr/dist/themes/dark.css";
+
+import "./settings.js";
+
 import marker from "leaflet/dist/images/marker-icon.png";
 import marker2x from "leaflet/dist/images/marker-icon-2x.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
@@ -13,6 +16,8 @@ L.Icon.Default.mergeOptions({
   iconUrl: marker,
   shadowUrl: markerShadow
 });
+
+import flatpickr from "flatpickr";
 
 import "./js/core.js";
 
