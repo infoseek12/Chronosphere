@@ -30,6 +30,8 @@ import "./js/drawTerminator.js";
 
 import "./js/loadInitialMap.js";
 
+import "./js/dateTimePicker.js";
+
 import "./js/moonCalc.js";
 
 import "./js/planetaryOrbits.js";
