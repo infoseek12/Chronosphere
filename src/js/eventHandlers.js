@@ -1,10 +1,7 @@
 //TimeBar
 document.getElementsByClassName("timeReset")[0].addEventListener("click",
-  () => {
-    chronoSphere.resetToPresent();
-    console.log;
-  }, false);
-
+  () => chronoSphere.resetToPresent()
+  , false);
 
 //Change time
 document.getElementsByClassName("yearB")[0].addEventListener("click",

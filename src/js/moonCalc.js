@@ -10,23 +10,23 @@ let moonStart = () => { 'use strict';
 
     // shortcuts for easier to read formulas
 
-    let PI   = Math.PI,
-        sin  = Math.sin,
-        cos  = Math.cos,
-        tan  = Math.tan,
-        asin = Math.asin,
-        atan = Math.atan2,
-        acos = Math.acos,
-        rad  = PI / 180;
+    const PI   = Math.PI,
+          sin  = Math.sin,
+          cos  = Math.cos,
+          tan  = Math.tan,
+          asin = Math.asin,
+          atan = Math.atan2,
+          acos = Math.acos,
+          rad  = PI / 180;
 
     // sun calculations are based on http://aa.quae.nl/en/reken/zonpositie.html formulas
 
 
     // date/time constants and conversions
 
-    let dayMs = 1000 * 60 * 60 * 24,
-        J1970 = 2440588,
-        J2000 = 2451545;
+    const dayMs = 1000 * 60 * 60 * 24,
+          J1970 = 2440588,
+          J2000 = 2451545;
 
     function toJulian(date) { return date.valueOf() / dayMs - 0.5 + J1970; }
     function fromJulian(j)  { return new Date((j + 0.5 - J1970) * dayMs); }
@@ -35,7 +35,7 @@ let moonStart = () => { 'use strict';
 
     // general calculations for position
 
-    let e = rad * 23.4397; // obliquity of the Earth
+    const e = rad * 23.4397; // obliquity of the Earth
 
     function rightAscension(l, b) { return atan(sin(l) * cos(e) - tan(b) * sin(e), cos(l)); }
     function declination(l, b)    { return asin(sin(b) * cos(e) + cos(b) * sin(e) * sin(l)); }
@@ -60,7 +60,7 @@ let moonStart = () => { 'use strict';
 
     function eclipticLongitude(M) {
 
-        let C = rad * (1.9148 * sin(M) + 0.02 * sin(2 * M) + 0.0003 * sin(3 * M)), // equation of center
+        const C = rad * (1.9148 * sin(M) + 0.02 * sin(2 * M) + 0.0003 * sin(3 * M)), // equation of center
             P = rad * 102.9372; // perihelion of the Earth
 
         return M + C + P + PI;
