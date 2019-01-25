@@ -170,11 +170,34 @@ L.TileLayer.BoundaryCanvas = L.TileLayer.extend({
 
 L.TileLayer.boundaryCanvas = function(url, options) {
   return new L.TileLayer.BoundaryCanvas(url, options);
-};
+}
 
 L.TileLayer.BoundaryCanvas.createFromLayer = function(layer, options) {
   return new L.TileLayer.BoundaryCanvas(
     layer._url,
     L.extend({}, layer.options, options)
   );
-};
+}
+
+let updateTerminator = () => {
+  let timeUp = moment(chronoSphere.currentTime);
+  timeUp = timeUp.add(chronoSphere.mapTime);
+
+  let nightTime2 = L.TileLayer.BoundaryCanvas.createFromLayer(
+    chronoSphere.nightTimeMap,
+    {
+      opacity: 0.9,
+      boundary: L.terminator({ time: timeUp })
+    }
+  ).addTo(chronoSphere.map);
+
+  
+  let chronUp = () => {
+    chronoSphere.map.removeLayer(chronoSphere.nightTimeMap);
+    chronoSphere.nightTimeMap = nightTime2;
+  }
+
+  setTimeout(chronUp, 250);
+}
+
+chronoSphere.addUpdateFunction(updateTerminator);

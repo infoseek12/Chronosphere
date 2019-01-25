@@ -92,7 +92,7 @@ let moonStart = () => { 'use strict';
             azimuth: azimuth(H, phi, c.dec),
             altitude: altitude(H, phi, c.dec)
         };
-    };
+    }
 
 
     // sun times configuration (angle, morning name, evening name)
@@ -110,7 +110,7 @@ let moonStart = () => { 'use strict';
 
     moonCalc.addTime = function (angle, riseName, setName) {
         times.push([angle, riseName, setName]);
-    };
+    }
 
 
     // calculations for sun times
@@ -172,7 +172,7 @@ let moonStart = () => { 'use strict';
             distance: c.dist,
             parallacticAngle: pa
         };
-    };
+    }
 
 
     // calculations for illumination parameters of the moon,
@@ -197,21 +197,21 @@ let moonStart = () => { 'use strict';
             phase: 0.5 + 0.5 * inc * (angle < 0 ? -1 : 1) / Math.PI,
             angle: angle
         };
-    };
+    }
 
 
     function hoursLater(date, h) {
         return new Date(date.valueOf() + h * dayMs / 24);
     }
 
-};
+}
 
 let updateMoon = () => {
   let timeUp = moment(chronoSphere.currentTime);
   timeUp = timeUp.add(chronoSphere.mapTime);
   let moonIMG = document.getElementById("moon");
   moonIMG.src = "./assets/img/moon/jpg/" + parseInt((moonCalc.getMoonIllumination(timeUp).phase * 35) + 1) + ".jpg";
-};
+}
 
 chronoSphere.addInitFunction(moonStart);
 
