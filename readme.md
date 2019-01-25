@@ -6,10 +6,7 @@ Chronosphere is built around a [singleton](https://en.wikipedia.org/wiki/Singlet
 
 Code taken from various opensource projects are combined, and to varying degrees, refactored. Updates are triggered every second and time calculations are done with the [MomentJS Library](https://momentjs.com). 
 
-## "Accuracy"
-
-### Known Inaccuracies
-***
+## Known Inaccuracies
 The timezone selector is sometimes off by an hour, due to daylight savings time not being factored in yet.
 
 The solar terminator is not sized correctly at all zoom levels, the gradient is off, and there are sometimes seams between the map tiles.
@@ -17,12 +14,10 @@ The solar terminator is not sized correctly at all zoom levels, the gradient is 
 The size of the planets is not proportioned accurately, nor are their orbits. This inaccuracy is intentional: it is impossible to display the correct proportions on any reasonably available screen.
 
 ## Build Steps
-***
 1. Run "NPM install" in shell to download the Node packages
 2. Run "npm run production" for a production build or "npm run dev" for a development build that will watch for changes
 
 ## Pull Requests
-***
 The project is still at a very initial stage and pull requests are very welcome.
 
 ## Todo
