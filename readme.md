@@ -57,7 +57,7 @@ The project is still at a very initial stage and pull requests are very welcome.
 * [Flatpickr](https://flatpickr.js.org) is used to select dates
 * The SVG's for Venus, Earth, Mars, Jupiter, and Neptune were adapted from the [Tango Desktop project](http://tango.freedesktop.org/Tango_Desktop_Project), Saturn is from [Wikipedia](https://commons.wikimedia.org/wiki/File:Saturn-148300.svg), as is [Uranus](https://commons.wikimedia.org/wiki/File:Uranus2-by_Merlin2525.svg), and [Saturn](https://commons.wikimedia.org/wiki/File:Saturn.svg)
 * The planet glyphs are from [Wikipedia](https://en.wikipedia.org/wiki/Astronomical_symbols#Symbols_for_the_planets)
-* The JPG's currently in use were uploaded by Jay Tanner to [WikiCommons](https://commons.wikimedia.org/wiki/Category:Lunar_phases)
+* The JPG's for lunar phase currently in use were uploaded by Jay Tanner to [WikiCommons](https://commons.wikimedia.org/wiki/Category:Lunar_phases)
 * The SVG's for the phases of the moon are from [Open Clip Art](https://openclipart.org)
 
 ### NPM and WebPack Plugins:
