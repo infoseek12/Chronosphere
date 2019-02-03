@@ -39,7 +39,7 @@ import "./js/planetaryOrbits.js";
 chronoSphere.runInitFunctions();
 
 chronoSphere.updateTime();
-setInterval(() => chronoSphere.updateTime(), 1000);
+setInterval(() => chronoSphere.updateTime(), 100);
 
 chronoSphere.runUpdateFunctions();
 setInterval(() => chronoSphere.runUpdateFunctions(), 30000);

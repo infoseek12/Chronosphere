@@ -2,12 +2,14 @@
 Chronosphere is an initial attempt to represent different kinds of information about the Earth and the solar system, at any given point in time. The visuals are intended to be informative rather than literally accurate while leaning towards reality when possible. For instance, the positions of the planets are correct but some of them have been brought closer to the sun to fit in the model.
 
 ## Architecture
-Chronosphere is built around a [singleton](https://en.wikipedia.org/wiki/Singleton_pattern) object named chronoSphere. "Temporal widgets", like moon phases and solar system orbits, are modules attached to the chronoSphere object. The primary map is not currently factored as an independent module.
+Chronosphere is built around a [singleton](https://en.wikipedia.org/wiki/Singleton_pattern) object named chronoSphere. "Temporal widgets", like moon phases and solar system orbits, are modules attached to the chronoSphere object. The time selector and map of the Earth is not currently factored as an independent module. HTML scaffolding also has to be added manually at this point.
 
-Code taken from various opensource projects are combined, and to varying degrees, refactored. Updates are triggered every second and time calculations are done with the [MomentJS Library](https://momentjs.com). 
+Code taken from various opensource projects are combined, and to varying degrees, refactored. Time calculations are done with the [MomentJS Library](https://momentjs.com) using the present date and an offset to the time being displayed.
+
+I believe it makes sense to keep all the widgets containerized and not to share dependencies (for things like astronomical calculations) as the additional code is minimal, doing so avoids race conditions, and it allows for more flexible configuration.
 
 ## Known Inaccuracies
-The timezone selector is sometimes off by an hour, due to daylight savings time not being factored in yet.
+The timezone selector is sometimes off in some timezones, due to daylight savings time not being factored in yet.
 
 The solar terminator is not sized correctly at all zoom levels, the gradient is off, and there are sometimes seams between the map tiles.
 
@@ -23,7 +25,7 @@ The project is still at a very initial stage and pull requests are very welcome.
 ## Todo
 ### General
 * Write tests
-* Plugin system to better modulize temporal widgets
+* Improve plugin system to better modulize temporal widgets. Develop layout systems to remove the need for HTML scaffolds. 
 * Improve mobile suppport
 
 ### Time management
@@ -35,9 +37,12 @@ The project is still at a very initial stage and pull requests are very welcome.
 * Show eclipses
 
 ### Additional Temporal Widgets
-* Solar weather (Note: use [this source of data](https://www.spaceweatherlive.com), and [these images for the sun]() if avalible at selected time)
+* Solar weather (Note: use [this source of data](https://www.spaceweatherlive.com) if avalible at selected time). Ideally the sun in the present orrery can be replaced with an image representing the solar weather at that time.
 * [Time Magizine covers](http://content.time.com/time/coversearch/), see [this tutorial](https://www.pyimagesearch.com/2015/10/12/scraping-images-with-python-and-scrapy/)
-* [significant events]() from Wikipedia
+* Significant events of the day  from Wikipedia
+* [Add constellations](https://github.com/slowe/VirtualSky). This will require some sort of widget to choose the location the sky's seen from.
+* Stock market data
+* Marine and aviation traffic
 
 ## Credits
 * The map is built on top of [Leaflet](https://leafletjs.com)

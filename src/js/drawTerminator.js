@@ -197,7 +197,7 @@ let updateTerminator = () => {
     chronoSphere.nightTimeMap = nightTime2;
   }
 
-  setTimeout(chronUp, 250);
+  setTimeout(chronUp, 500);
 }
 
 chronoSphere.addUpdateFunction(updateTerminator);
