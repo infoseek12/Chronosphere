@@ -5,6 +5,14 @@ import "leaflet/dist/leaflet.css";
 
 import "flatpickr/dist/themes/dark.css";
 
+let WebFont = require("webfontloader");
+
+WebFont.load({
+  google: {
+    families: ['Open Sans:400,700']
+  }
+});
+
 import "./settings.js";
 
 import marker from "leaflet/dist/images/marker-icon.png";
