@@ -17,7 +17,7 @@ The size of the planets is not proportioned accurately, nor are their orbits. Th
 
 ## Build Steps
 1. Run "npm install" in shell to download the Node packages
-2. Run "npm run production" for a production build or "npm run dev" for a development build that will watch for changes
+2. Run "npm run build" for a production build or "npm run dev" for a development build that will watch for changes
 
 ## Pull Requests
 The project is still at a very initial stage and pull requests are very welcome.
@@ -57,8 +57,7 @@ The project is still at a very initial stage and pull requests are very welcome.
 * [Flatpickr](https://flatpickr.js.org) is used to select dates
 * The SVG's for Venus, Earth, Mars, Jupiter, and Neptune were adapted from the [Tango Desktop project](http://tango.freedesktop.org/Tango_Desktop_Project), Saturn is from [Wikipedia](https://commons.wikimedia.org/wiki/File:Saturn-148300.svg), as is [Uranus](https://commons.wikimedia.org/wiki/File:Uranus2-by_Merlin2525.svg), and [Saturn](https://commons.wikimedia.org/wiki/File:Saturn.svg)
 * The planet glyphs are from [Wikipedia](https://en.wikipedia.org/wiki/Astronomical_symbols#Symbols_for_the_planets)
-* The JPG's currently in use for lunar phase were uploaded by Jay Tanner to [WikiCommons](https://commons.wikimedia.org/wiki/Category:Lunar_phases)
-* The SVG's for the phases of the moon are from [Open Clip Art](https://openclipart.org)
+* The JPG's currently in use, for lunar phase, were uploaded by Jay Tanner to [WikiCommons](https://commons.wikimedia.org/wiki/Category:Lunar_phases)
 
 ### NPM and WebPack Plugins:
 [autoprefixer](https://www.npmjs.com/package/autoprefixer),[babel-core](https://www.npmjs.com/package/babel-core),[babel-loader](https://www.npmjs.com/package/babel-loader),[babel-preset-env](https://www.npmjs.com/package/babel-preset-env),[file-loader](https://www.npmjs.com/package/file-loader),[css-loader](https://www.npmjs.com/package/css-loader),[mini-css-extract-plugin](https://www.npmjs.com/package/mini-css-extract-plugin),[node-sass](https://www.npmjs.com/package/node-sass),[postcss-loader](https://www.npmjs.com/package/postcss-loader),[sass-loader](https://www.npmjs.com/package/sass-loader),[style-loader](https://www.npmjs.com/package/style-loader),[webpack](https://www.npmjs.com/package/webpack),[webpack-cli](https://www.npmjs.com/package/webpack-cli)
