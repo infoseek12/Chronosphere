@@ -1,0 +1,19 @@
+{
+    "extends": "airbnb-base",
+    "rules" : {
+        "linebreak-style": "off" //Accept Linux and Windows style line endings
+    },
+    "env": {
+        "browser": true
+    },
+    "globals": {
+        "L":"writable",
+        "moment":"writable",
+        "chronoSphere":"writable"
+    },
+    "overrides": [
+    {
+      "files": [ "./src/**/*.js" ]
+    }
+  ]
+}
