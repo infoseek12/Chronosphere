@@ -287,7 +287,7 @@ const updateTerminator = () => {
     if (tileLoadCounter === 14) {
       setTimeout(() => {
         chronoSphere.map.removeLayer(oldLayer);
-      }, 1);
+      }, 250);
     }
   };
 
