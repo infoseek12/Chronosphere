@@ -1,36 +1,31 @@
-let initPicker = () => {
-  let mapTimeText = document.getElementsByClassName("mapTime")[0];
-  let timeUp = moment(chronoSphere.currentTime);
-  timeUp = timeUp.add(chronoSphere.mapTime);
-  let dtOpts = {
+import flatpickr from 'flatpickr';
+import 'flatpickr/dist/themes/dark.css';
+
+const initPicker = () => {
+  const mapTimeText = document.getElementsByClassName('mapTime')[0];
+  const timeUp = moment(chronoSphere.currentTime).add(chronoSphere.mapTime);
+  const dtPickrOpts = {
     enableTime: true,
-    dateFormat: "Y-m-d H:i",
-    defaultDate: timeUp
-      .utcOffset(chronoSphere.timezoneUTCHoursOffset)
-      .format("YYYY-MM-DD HH:mm"),
-    onClose: function(dateObj, dateStr, instance) {
-      let ChangeDateStr = moment(dateStr);
+    dateFormat: 'Y-m-d H:i',
+    defaultDate: timeUp.utcOffset(chronoSphere.timezoneUTCHoursOffset).format('YYYY-MM-DD HH:mm'),
+    onClose: function closeDateTime(dateObj, dateStr) {
+      const ChangeDateStr = moment(dateStr);
       chronoSphere.mapTime = moment.duration(
         ChangeDateStr.diff(
-          chronoSphere.currentTime
-            .utcOffset(chronoSphere.timezoneUTCHoursOffset)
-            .format()
+          chronoSphere.currentTime.utcOffset(chronoSphere.timezoneUTCHoursOffset).format()
         )
       );
       chronoSphere.runUpdateFunctions();
     }
   };
 
-  chronoSphere.datePicker = new flatpickr(mapTimeText, dtOpts);
+  chronoSphere.datePicker = new flatpickr(mapTimeText, dtPickrOpts);
 };
 
-let updatePicker = () => {
-  let timeUp = moment(chronoSphere.currentTime);
-  timeUp = timeUp.add(chronoSphere.mapTime);
+const updatePicker = () => {
+  const timeUp = moment(chronoSphere.currentTime).add(chronoSphere.mapTime);
   chronoSphere.datePicker.setDate(
-    timeUp
-      .utcOffset(chronoSphere.timezoneUTCHoursOffset)
-      .format("YYYY-MM-DD HH:mm")
+    timeUp.utcOffset(chronoSphere.timezoneUTCHoursOffset).format('YYYY-MM-DD HH:mm')
   );
 };
 

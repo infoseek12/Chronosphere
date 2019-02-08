@@ -1,19 +1,22 @@
 {
     "extends": "airbnb-base",
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module"
+    },
     "rules" : {
-        "linebreak-style": "off" //Accept Linux and Windows style line endings
+        "linebreak-style": "off", //accept Linux and Windows style line endings
+        "no-underscore-dangle": 0, //allow underscore for private method convention
+        "comma-dangle": [2, "never"], //don't require comma after last item
+        "spaced-comment": "off" //don't require white space after comment
     },
     "env": {
         "browser": true
     },
     "globals": {
-        "L":"writable",
-        "moment":"writable",
+        "L":"readable",
+        "moment":"readable",
+        "flatpickr":"readable",
         "chronoSphere":"writable"
-    },
-    "overrides": [
-    {
-      "files": [ "./src/**/*.js" ]
     }
-  ]
 }

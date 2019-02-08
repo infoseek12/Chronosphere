@@ -1,48 +1,30 @@
-import "./css/style.css";
+import './settings';
 
-import "leaflet";
-import "leaflet/dist/leaflet.css";
+import './js/core';
 
-import "flatpickr/dist/themes/dark.css";
+import './js/changeTime';
 
-let WebFont = require("webfontloader");
+import './js/eventHandlers';
+
+import './js/loadInitialMap';
+
+import './js/drawTerminator';
+
+import './js/dateTimePicker';
+
+import './js/moonCalc';
+
+import './js/planetaryOrbits';
+
+import './css/style.css';
+
+const WebFont = require('webfontloader');
 
 WebFont.load({
   google: {
-    families: ["Open Sans:400,700"]
+    families: ['Open Sans:400,700']
   }
 });
-
-import "./settings.js";
-
-import marker from "leaflet/dist/images/marker-icon.png";
-import marker2x from "leaflet/dist/images/marker-icon-2x.png";
-import markerShadow from "leaflet/dist/images/marker-shadow.png";
-delete L.Icon.Default.prototype._getIconUrl;
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: marker2x,
-  iconUrl: marker,
-  shadowUrl: markerShadow
-});
-
-import flatpickr from "flatpickr";
-
-import "./js/core.js";
-
-import "./js/changeTime.js";
-
-import "./js/eventHandlers.js";
-
-import "./js/calculateTerminator.js";
-import "./js/drawTerminator.js";
-
-import "./js/loadInitialMap.js";
-
-import "./js/dateTimePicker.js";
-
-import "./js/moonCalc.js";
-
-import "./js/planetaryOrbits.js";
 
 chronoSphere.runInitFunctions();
 

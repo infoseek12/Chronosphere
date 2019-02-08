@@ -1,4 +1,18 @@
-chronoSphere.map = new L.Map("map", {
+import 'leaflet';
+
+import 'leaflet/dist/leaflet.css';
+
+import marker from 'leaflet/dist/images/marker-icon.png';
+import marker2x from 'leaflet/dist/images/marker-icon-2x.png';
+import markerShadow from 'leaflet/dist/images/marker-shadow.png';
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: marker2x,
+  iconUrl: marker,
+  shadowUrl: markerShadow
+});
+
+chronoSphere.map = new L.Map('map', {
   detectRetina: true,
   center: new L.LatLng(120, 0),
   zoom: 2,
@@ -10,14 +24,5 @@ chronoSphere.map = new L.Map("map", {
 });
 
 L.tileLayer(
-  "https://api.mapbox.com/styles/v1/infoseek/cjdw9ibdb3po22tk4fndz0ke5/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaW5mb3NlZWsiLCJhIjoiY2pkajV6OXFtMWpqaDMzcGdyaGh6cjJ2NiJ9.ARSABTSiSWmuSQA2fbpzUw"
-).addTo(chronoSphere.map);
-
-chronoSphere.nightTimeMap = L.TileLayer.boundaryCanvas(
-  "https://api.mapbox.com/styles/v1/infoseek/cjf4g08rk19me2sp368t2lhvg/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaW5mb3NlZWsiLCJhIjoiY2pkajV6OXFtMWpqaDMzcGdyaGh6cjJ2NiJ9.ARSABTSiSWmuSQA2fbpzUw",
-  {
-    boundary: L.terminator({
-      time: chronoSphere.currentTime.add(chronoSphere.mapTime).format()
-    })
-  }
+  'https://api.mapbox.com/styles/v1/infoseek/cjdw9ibdb3po22tk4fndz0ke5/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaW5mb3NlZWsiLCJhIjoiY2pkajV6OXFtMWpqaDMzcGdyaGh6cjJ2NiJ9.ARSABTSiSWmuSQA2fbpzUw'
 ).addTo(chronoSphere.map);

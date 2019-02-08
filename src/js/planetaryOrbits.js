@@ -38,10 +38,10 @@ let offsetPlanetsX = 35;
 
 let T6 = {
   //Define background canvas
-  canvasbackground: document.getElementById("LAYER_BACKGROUND_T6"), //Grab the HTML5 Background Canvas (will only be drawn once)
+  canvasbackground: document.getElementById('LAYER_BACKGROUND_T6'), //Grab the HTML5 Background Canvas (will only be drawn once)
   contextbackground: null,
   //Define foreground canvas
-  canvasforeground: document.getElementById("LAYER_FOREGROUND_T6"), //Grab the HTML5 Foreground Canvas (elements on this canvas will be rendered every frame; moving objects)
+  canvasforeground: document.getElementById('LAYER_FOREGROUND_T6'), //Grab the HTML5 Foreground Canvas (elements on this canvas will be rendered every frame; moving objects)
   contextforeground: null,
   width: 450,
   height: 450,
@@ -59,14 +59,7 @@ let T6 = {
     //MERCURY (0)
     [0.38709927, 0.20563593, 7.00497902, 252.2503235, 77.45779628, 48.33076593],
     //VENUS (1)
-    [
-      0.72333566,
-      0.00677672,
-      3.39467605,
-      181.9790995,
-      131.60246718,
-      76.67984255
-    ],
+    [0.72333566, 0.00677672, 3.39467605, 181.9790995, 131.60246718, 76.67984255],
     //EARTH (2)
     [1.00000261, 0.01671123, -0.00001531, 100.46457166, 102.93768193, 0.0],
     //MARS (3)
@@ -74,92 +67,29 @@ let T6 = {
     //JUPITER (4)
     [5.202887, 0.04838624, 1.30439695, 34.39644051, 14.72847983, 100.47390909],
     //SATURN (5)
-    [
-      9.53667594,
-      0.05386179,
-      2.48599187,
-      49.95424423,
-      92.59887831,
-      113.66242448
-    ],
+    [9.53667594, 0.05386179, 2.48599187, 49.95424423, 92.59887831, 113.66242448],
     //URANUS (6)
-    [
-      19.18916464,
-      0.04725744,
-      0.77263783,
-      313.23810451,
-      170.9542763,
-      74.01692503
-    ],
+    [19.18916464, 0.04725744, 0.77263783, 313.23810451, 170.9542763, 74.01692503],
     //NEPTUNE (7)
-    [
-      30.06992276,
-      0.00859048,
-      1.77004347,
-      -55.12002969,
-      44.96476227,
-      131.78422574
-    ]
+    [30.06992276, 0.00859048, 1.77004347, -55.12002969, 44.96476227, 131.78422574]
   ],
 
   //RATES: a, e, i, mean longitude (L), longitude of perihelion, longitude of ascending node
   planetRates: [
     //MERCURY (0)
-    [
-      0.00000037,
-      0.00001906,
-      -0.00594749,
-      149472.67411175,
-      0.16047689,
-      -0.1253408
-    ],
+    [0.00000037, 0.00001906, -0.00594749, 149472.67411175, 0.16047689, -0.1253408],
     //VENUS (1)
-    [
-      0.0000039,
-      -0.00004107,
-      -0.0007889,
-      58517.81538729,
-      0.00268329,
-      -0.27769418
-    ],
+    [0.0000039, -0.00004107, -0.0007889, 58517.81538729, 0.00268329, -0.27769418],
     //EARTH (2)
     [0.00000562, -0.00004392, -0.01294668, 35999.37244981, 0.32327364, 0.0],
     //MARS (3)
-    [
-      0.00001847,
-      0.00007882,
-      -0.00813131,
-      19140.30268499,
-      0.44441088,
-      -0.29257343
-    ],
+    [0.00001847, 0.00007882, -0.00813131, 19140.30268499, 0.44441088, -0.29257343],
     //JUPITER (4)
-    [
-      -0.00011607,
-      -0.00013253,
-      -0.00183714,
-      3034.74612775,
-      0.21252668,
-      0.20469106
-    ],
+    [-0.00011607, -0.00013253, -0.00183714, 3034.74612775, 0.21252668, 0.20469106],
     //SATURN (5)
-    [
-      -0.0012506,
-      -0.00050991,
-      0.00193609,
-      1222.49362201,
-      -0.41897216,
-      -0.28867794
-    ],
+    [-0.0012506, -0.00050991, 0.00193609, 1222.49362201, -0.41897216, -0.28867794],
     //URANUS (6)
-    [
-      -0.00196176,
-      -0.00004397,
-      -0.00242939,
-      428.48202785,
-      0.40805281,
-      0.04240589
-    ],
+    [-0.00196176, -0.00004397, -0.00242939, 428.48202785, 0.40805281, 0.04240589],
     //NEPTUNE (7)
     [0.00026291, 0.00005105, 0.00035372, 218.45945325, -0.32241464, -0.00508664]
   ],
@@ -199,8 +129,8 @@ function findOffset() {
 }
 
 function initPlanets() {
-  T6.contextbackground = T6.canvasbackground.getContext("2d"); //Need the context to be able to draw on the canvas
-  T6.contextforeground = T6.canvasforeground.getContext("2d"); //Need the context to be able to draw on the canvas
+  T6.contextbackground = T6.canvasbackground.getContext('2d'); //Need the context to be able to draw on the canvas
+  T6.contextforeground = T6.canvasforeground.getContext('2d'); //Need the context to be able to draw on the canvas
 
   T6.width = T6.canvasforeground.width;
   T6.height = T6.canvasforeground.height;
@@ -261,7 +191,7 @@ function runPlanets() {
 //RENDER BACKGROUND. ONLY INCLUDES STATIC ELEMENTS ON SCREEN.
 function renderBackground_T6() {
   //Set background color of canvas
-  T6.contextbackground.fillStyle = "#000022";
+  T6.contextbackground.fillStyle = '#000022';
   T6.contextbackground.fillRect(0, 0, T6.width, T6.height); //"ClearRect" by painting background color
 
   //render Sun at center
@@ -274,7 +204,7 @@ function renderBackground_T6() {
     2 * Math.PI,
     true
   );
-  T6.contextbackground.fillStyle = "yellow";
+  T6.contextbackground.fillStyle = 'yellow';
   T6.contextbackground.fill();
   T6.contextbackground.closePath();
 }
@@ -285,66 +215,66 @@ function renderForeground_T6() {
   T6.contextforeground.clearRect(0, 0, T6.width, T6.height);
   let planetLoc = [
     {
-      planet: "Mercury",
+      planet: 'Mercury',
       x: T6.width / 2 + T6.xMercury * T6.scale,
       y: T6.height / 2 - T6.yMercury * T6.scale,
       radius: 12,
-      id: "mercury-icon"
+      id: 'mercury-icon'
     },
     {
-      planet: "Venus",
+      planet: 'Venus',
       x: T6.width / 2 + T6.xVenus * T6.scale,
       y: T6.height / 2 - T6.yVenus * T6.scale,
       radius: 12,
-      id: "venus-icon"
+      id: 'venus-icon'
     },
     {
-      planet: "Earth",
+      planet: 'Earth',
       x: T6.width / 2 + T6.xEarth * T6.scale,
       y: T6.height / 2 - T6.yEarth * T6.scale,
       radius: 18,
-      id: "earth-icon"
+      id: 'earth-icon'
     },
     {
-      planet: "Mars",
+      planet: 'Mars',
       x: T6.width / 2 + T6.xMars * T6.scale,
       y: T6.height / 2 - T6.yMars * T6.scale,
       radius: 15,
-      id: "mars-icon"
+      id: 'mars-icon'
     },
     {
-      planet: "Jupiter",
+      planet: 'Jupiter',
       x: T6.width / 2 + (T6.xJupiter * T6.scale) / T6.jupiterScaleDivider,
       y: T6.height / 2 - (T6.yJupiter * T6.scale) / T6.jupiterScaleDivider,
       radius: 20,
-      id: "jupiter-icon"
+      id: 'jupiter-icon'
     },
     {
-      planet: "Saturn",
+      planet: 'Saturn',
       x: T6.width / 2 + (T6.xSaturn * T6.scale) / T6.saturnScaleDivider,
       y: T6.height / 2 - (T6.ySaturn * T6.scale) / T6.saturnScaleDivider,
       radius: 27,
-      id: "saturn-icon"
+      id: 'saturn-icon'
     },
     {
-      planet: "Uranus",
+      planet: 'Uranus',
       x: T6.width / 2 + (T6.xUranus * T6.scale) / T6.uranusScaleDivider,
       y: T6.height / 2 - (T6.yUranus * T6.scale) / T6.uranusScaleDivider,
       radius: 15,
-      id: "uranus-icon"
+      id: 'uranus-icon'
     },
     {
-      planet: "Neptune",
+      planet: 'Neptune',
       x: T6.width / 2 + (T6.xNeptune * T6.scale) / T6.neptuneScaleDivider,
       y: T6.height / 2 - (T6.yNeptune * T6.scale) / T6.neptuneScaleDivider,
       radius: 10,
-      id: "neptune-icon"
+      id: 'neptune-icon'
     }
   ];
 
   const load = () => {
-    let c = document.getElementById("LAYER_FOREGROUND_T6");
-    let ctx = c.getContext("2d");
+    let c = document.getElementById('LAYER_FOREGROUND_T6');
+    let ctx = c.getContext('2d');
     planetNames = [];
 
     for (let i = 0; i < planetLoc.length; i++) {
@@ -371,7 +301,7 @@ function renderForeground_T6() {
 
 function getJulianDate_T6(Year, Month, Day) {
   let inputDate = new Date(Year, Month, Math.floor(Day));
-  let switchDate = new Date("1582", "10", "15");
+  let switchDate = new Date('1582', '10', '15');
 
   let isGregorianDate = inputDate >= switchDate;
 
@@ -395,20 +325,12 @@ function getJulianDate_T6(Year, Month, Day) {
     B = 0;
   }
 
-  return (
-    Math.floor(365.25 * Year) +
-    Math.floor(30.6001 * (Month + 1)) +
-    Day +
-    1720994.5 +
-    B
-  );
+  return Math.floor(365.25 * Year) + Math.floor(30.6001 * (Month + 1)) + Day + 1720994.5 + B;
 }
 
 function updatePlanetTime() {
   //1. Get Gregorian Date
-  let timeUp = moment(
-    chronoSphere.currentTime.utcOffset(chronoSphere.timezoneUTCHoursOffset)
-  );
+  let timeUp = moment(chronoSphere.currentTime.utcOffset(chronoSphere.timezoneUTCHoursOffset));
   timeUp.add(chronoSphere.mapTime);
   T6.current = timeUp.toDate();
   T6.DAY = T6.current.getDate();
@@ -425,31 +347,26 @@ function plotPlanet_T6(TGen, planetNumber) {
   //1.
   //ORBIT SIZE
   //AU (CONSTANT = DOESN'T CHANGE)
-  aGen =
-    T6.planetElements[planetNumber][0] + T6.planetRates[planetNumber][0] * TGen;
+  aGen = T6.planetElements[planetNumber][0] + T6.planetRates[planetNumber][0] * TGen;
   //2.
   //ORBIT SHAPE
   //ECCENTRICITY (CONSTANT = DOESN'T CHANGE)
-  eGen =
-    T6.planetElements[planetNumber][1] + T6.planetRates[planetNumber][1] * TGen;
+  eGen = T6.planetElements[planetNumber][1] + T6.planetRates[planetNumber][1] * TGen;
   //--------------------------------------------------------------------------------------------
   //3.
   //ORBIT ORIENTATION
   //ORBITAL INCLINATION (CONSTANT = DOESN'T CHANGE)
-  iGen =
-    T6.planetElements[planetNumber][2] + T6.planetRates[planetNumber][2] * TGen;
+  iGen = T6.planetElements[planetNumber][2] + T6.planetRates[planetNumber][2] * TGen;
   iGen = iGen % 360;
   //4.
   //ORBIT ORIENTATION
   //LONG OF ASCENDING NODE (CONSTANT = DOESN'T CHANGE)
-  WGen =
-    T6.planetElements[planetNumber][5] + T6.planetRates[planetNumber][5] * TGen;
+  WGen = T6.planetElements[planetNumber][5] + T6.planetRates[planetNumber][5] * TGen;
   WGen = WGen % 360;
   //5.
   //ORBIT ORIENTATION
   //LONGITUDE OF THE PERIHELION
-  wGen =
-    T6.planetElements[planetNumber][4] + T6.planetRates[planetNumber][4] * TGen;
+  wGen = T6.planetElements[planetNumber][4] + T6.planetRates[planetNumber][4] * TGen;
   wGen = wGen % 360;
   if (wGen < 0) {
     wGen = 360 + wGen;
@@ -458,8 +375,7 @@ function plotPlanet_T6(TGen, planetNumber) {
   //6.
   //ORBIT POSITION
   //MEAN LONGITUDE (DYNAMIC = CHANGES OVER TIME)
-  LGen =
-    T6.planetElements[planetNumber][3] + T6.planetRates[planetNumber][3] * TGen;
+  LGen = T6.planetElements[planetNumber][3] + T6.planetRates[planetNumber][3] * TGen;
   LGen = LGen % 360;
   if (LGen < 0) {
     LGen = 360 + LGen;
@@ -475,8 +391,7 @@ function plotPlanet_T6(TGen, planetNumber) {
   EGen = EccAnom_T6(eGen, MGen, 6);
 
   //ARGUMENT OF TRUE ANOMALY
-  trueAnomalyArgGen =
-    Math.sqrt((1 + eGen) / (1 - eGen)) * Math.tan(toRadians_T6(EGen) / 2);
+  trueAnomalyArgGen = Math.sqrt((1 + eGen) / (1 - eGen)) * Math.tan(toRadians_T6(EGen) / 2);
 
   //TRUE ANOMALY (DYNAMIC = CHANGES OVER TIME)
   K = Math.PI / 180.0; //Radian converter letiable
@@ -505,9 +420,7 @@ function plotPlanet_T6(TGen, planetNumber) {
       Math.cos(toRadians_T6(WGen)) *
         Math.sin(toRadians_T6(nGen + wGen - WGen)) *
         Math.cos(toRadians_T6(iGen)));
-  zGen =
-    rGen *
-    (Math.sin(toRadians_T6(nGen + wGen - WGen)) * Math.sin(toRadians_T6(iGen)));
+  zGen = rGen * (Math.sin(toRadians_T6(nGen + wGen - WGen)) * Math.sin(toRadians_T6(iGen)));
 
   return [xGen, yGen];
 }
@@ -551,15 +464,15 @@ function toRadians_T6(deg) {
 }
 
 function round_T6(value, decimals) {
-  return Number(Math.round(value + "e" + decimals) + "e-" + decimals);
+  return Number(Math.round(value + 'e' + decimals) + 'e-' + decimals);
 }
 
 function displayToolTip(e) {
   e.preventDefault();
   e.stopPropagation();
 
-  let canvasTXT = T6.canvasforeground.getContext("2d");
-  canvasTXT.fillStyle = "#f7f4ef";
+  let canvasTXT = T6.canvasforeground.getContext('2d');
+  canvasTXT.fillStyle = '#f7f4ef';
   canvasTXT.font = "17px 'Open Sans'";
 
   let mouseX = parseInt(e.clientX - offsetX);

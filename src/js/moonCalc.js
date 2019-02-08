@@ -7,7 +7,7 @@
 let moonCalc = {};
 
 let moonStart = () => {
-  "use strict";
+  'use strict';
 
   // shortcuts for easier to read formulas
 
@@ -111,12 +111,12 @@ let moonStart = () => {
   // sun times configuration (angle, morning name, evening name)
 
   let times = (moonCalc.times = [
-    [-0.833, "sunrise", "sunset"],
-    [-0.3, "sunriseEnd", "sunsetStart"],
-    [-6, "dawn", "dusk"],
-    [-12, "nauticalDawn", "nauticalDusk"],
-    [-18, "nightEnd", "night"],
-    [6, "goldenHourEnd", "goldenHour"]
+    [-0.833, 'sunrise', 'sunset'],
+    [-0.3, 'sunriseEnd', 'sunsetStart'],
+    [-6, 'dawn', 'dusk'],
+    [-12, 'nauticalDawn', 'nauticalDusk'],
+    [-18, 'nightEnd', 'night'],
+    [6, 'goldenHourEnd', 'goldenHour']
   ]);
 
   // adds a custom time to the times config
@@ -199,9 +199,7 @@ let moonStart = () => {
       s = sunCoords(d),
       m = moonCoords(d),
       sdist = 149598000, // distance from Earth to Sun in km
-      phi = acos(
-        sin(s.dec) * sin(m.dec) + cos(s.dec) * cos(m.dec) * cos(s.ra - m.ra)
-      ),
+      phi = acos(sin(s.dec) * sin(m.dec) + cos(s.dec) * cos(m.dec) * cos(s.ra - m.ra)),
       inc = atan(sdist * sin(phi), m.dist - sdist * cos(phi)),
       angle = atan(
         cos(s.dec) * sin(s.ra - m.ra),
@@ -223,11 +221,11 @@ let moonStart = () => {
 let updateMoon = () => {
   let timeUp = moment(chronoSphere.currentTime);
   timeUp = timeUp.add(chronoSphere.mapTime);
-  let moonIMG = document.getElementById("moon");
+  let moonIMG = document.getElementById('moon');
   moonIMG.src =
-    "./assets/img/moon/jpg/" +
+    './assets/img/moon/jpg/' +
     parseInt(moonCalc.getMoonIllumination(timeUp).phase * 35 + 1) +
-    ".jpg";
+    '.jpg';
 };
 
 chronoSphere.addInitFunction(moonStart);

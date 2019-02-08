@@ -1,22 +1,10 @@
-let initQueue = [];
-let updateQueue = [];
+const initQueue = [];
+const updateQueue = [];
 
-chronoSphere.addInitFunction = newFunc => {
-  initQueue.push(newFunc);
-};
+chronoSphere.addInitFunction = newFunc => initQueue.push(newFunc);
 
-chronoSphere.addUpdateFunction = newFunc => {
-  updateQueue.push(newFunc);
-};
+chronoSphere.addUpdateFunction = newFunc => updateQueue.push(newFunc);
 
-chronoSphere.runInitFunctions = () => {
-  initQueue.forEach(function(func) {
-    func();
-  });
-};
+chronoSphere.runInitFunctions = () => initQueue.forEach(func => func());
 
-chronoSphere.runUpdateFunctions = () => {
-  updateQueue.forEach(function(func) {
-    func();
-  });
-};
+chronoSphere.runUpdateFunctions = () => updateQueue.forEach(func => func());
