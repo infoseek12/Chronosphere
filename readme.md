@@ -55,10 +55,11 @@ The project is still at a very initial stage and pull requests are very welcome.
 * The code for calculating the position of the planets is from Chris Jager's [Planetary Orbits](http://www.planetaryorbits.com/tutorial-javascript-orbit-simulation.html)
 * [MomentJS](https://momentjs.com) is used for time calculations
 * [Flatpickr](https://flatpickr.js.org) is used to select dates
-* The SVG's for Venus, Earth, Mars, Jupiter, and Neptune were adapted from the [Tango Desktop project](http://tango.freedesktop.org/Tango_Desktop_Project), Saturn is from [Wikipedia](https://commons.wikimedia.org/wiki/File:Saturn-148300.svg), as is [Uranus](https://commons.wikimedia.org/wiki/File:Uranus2-by_Merlin2525.svg), and [Saturn](https://commons.wikimedia.org/wiki/File:Saturn.svg)
+* The SVG's for Venus, Earth, Mars, Jupiter, and Neptune were adapted from the [Tango Desktop project](http://tango.freedesktop.org/Tango_Desktop_Project), Saturn is from [Wikipedia](https://commons.wikimedia.org/wiki/File:Saturn-148300.svg), and [Saturn](https://commons.wikimedia.org/wiki/File:Saturn.svg)
+* [Uranus](https://www.svgrepo.com/svg/47841/uranus) is from SVG Depot
 * The planet glyphs are from [Wikipedia](https://en.wikipedia.org/wiki/Astronomical_symbols#Symbols_for_the_planets)
 * The JPG's currently in use, for lunar phase, were uploaded by Jay Tanner to [WikiCommons](https://commons.wikimedia.org/wiki/Category:Lunar_phases)
-* [Google Fonts Open Sans](https://fonts.google.com/specimen/Open+Sans) is being used as the font throughout
+* [Google Fonts, Open Sans](https://fonts.google.com/specimen/Open+Sans) is being used as the primary font throughout
 
 ### NPM and WebPack Plugins:
 [autoprefixer](https://www.npmjs.com/package/autoprefixer),[babel-core](https://www.npmjs.com/package/babel-core),[babel-loader](https://www.npmjs.com/package/babel-loader),[babel-preset-env](https://www.npmjs.com/package/babel-preset-env),[file-loader](https://www.npmjs.com/package/file-loader),[css-loader](https://www.npmjs.com/package/css-loader),[mini-css-extract-plugin](https://www.npmjs.com/package/mini-css-extract-plugin),[node-sass](https://www.npmjs.com/package/node-sass),[postcss-loader](https://www.npmjs.com/package/postcss-loader),[sass-loader](https://www.npmjs.com/package/sass-loader),[style-loader](https://www.npmjs.com/package/style-loader),[webfontloader](https://www.npmjs.com/package/webfontloader),[webpack](https://www.npmjs.com/package/webpack),[webpack-cli](https://www.npmjs.com/package/webpack-cli)
