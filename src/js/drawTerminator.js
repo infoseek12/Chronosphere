@@ -97,11 +97,11 @@ let ExtendMethods = {
       if (geom.length > 4 && chronoSphere.showTerminator == true) {
         ctx.beginPath();
         for (let o = 1; o < 12; o++) {
-          ctx.strokeStyle = "rgba(5, 4, 16, " + (0.01 * o) + ")";
-          ctx.lineWidth = ((o * (zCoeff / 2)) * .5);
+          ctx.strokeStyle = "rgba(5, 4, 16, " + 0.01 * o + ")";
+          ctx.lineWidth = o * (zCoeff / 2) * 0.5;
           ctx.moveTo(
             terminatorClip.x[1],
-            terminatorClip.y[1] + (reverseTerminator * o)
+            terminatorClip.y[1] + reverseTerminator * o
           );
 
           for (let p = 2; p <= terminatorClip.x.length; p++) {
@@ -110,13 +110,15 @@ let ExtendMethods = {
               p += 1;
               ctx.beginPath();
               ctx.moveTo(
-                terminatorClip.x[p], terminatorClip.y[p] + reverseTerminator * o
+                terminatorClip.x[p],
+                terminatorClip.y[p] + reverseTerminator * o
               );
               p += 1;
               continue;
             }
             ctx.lineTo(
-              terminatorClip.x[p], terminatorClip.y[p] + reverseTerminator * o
+              terminatorClip.x[p],
+              terminatorClip.y[p] + reverseTerminator * o
             );
           }
           ctx.stroke();
@@ -170,14 +172,14 @@ L.TileLayer.BoundaryCanvas = L.TileLayer.extend({
 
 L.TileLayer.boundaryCanvas = function(url, options) {
   return new L.TileLayer.BoundaryCanvas(url, options);
-}
+};
 
 L.TileLayer.BoundaryCanvas.createFromLayer = function(layer, options) {
   return new L.TileLayer.BoundaryCanvas(
     layer._url,
     L.extend({}, layer.options, options)
   );
-}
+};
 
 let updateTerminator = () => {
   let timeUp = moment(chronoSphere.currentTime);
@@ -191,13 +193,12 @@ let updateTerminator = () => {
     }
   ).addTo(chronoSphere.map);
 
-  
   let chronUp = () => {
     chronoSphere.map.removeLayer(chronoSphere.nightTimeMap);
     chronoSphere.nightTimeMap = nightTime2;
-  }
+  };
 
   setTimeout(chronUp, 500);
-}
+};
 
 chronoSphere.addUpdateFunction(updateTerminator);

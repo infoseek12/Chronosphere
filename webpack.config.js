@@ -1,6 +1,7 @@
 const path = require("path");
 const webpack = require("webpack");
 const MiniCssExtractor = require("mini-css-extract-plugin");
+const Prettyfy = require("prettier-webpack-plugin");
 
 module.exports = {
   entry: {
@@ -38,6 +39,7 @@ module.exports = {
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/), // Ignore all locale files of moment.js
     new MiniCssExtractor({
       filename: "style.css",
-    })
+    }),
+    new Prettyfy
   ]
 }

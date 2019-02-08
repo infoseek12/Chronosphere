@@ -16,6 +16,8 @@ L.tileLayer(
 chronoSphere.nightTimeMap = L.TileLayer.boundaryCanvas(
   "https://api.mapbox.com/styles/v1/infoseek/cjf4g08rk19me2sp368t2lhvg/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaW5mb3NlZWsiLCJhIjoiY2pkajV6OXFtMWpqaDMzcGdyaGh6cjJ2NiJ9.ARSABTSiSWmuSQA2fbpzUw",
   {
-    boundary: L.terminator({ time: chronoSphere.currentTime.add(chronoSphere.mapTime).format() })
+    boundary: L.terminator({
+      time: chronoSphere.currentTime.add(chronoSphere.mapTime).format()
+    })
   }
 ).addTo(chronoSphere.map);

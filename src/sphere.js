@@ -9,7 +9,7 @@ let WebFont = require("webfontloader");
 
 WebFont.load({
   google: {
-    families: ['Open Sans:400,700']
+    families: ["Open Sans:400,700"]
   }
 });
 
