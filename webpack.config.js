@@ -1,6 +1,6 @@
 const path = require("path");
 const webpack = require("webpack");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractor = require("mini-css-extract-plugin");
 
 module.exports = {
   entry: {
@@ -27,7 +27,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use:  [  "style-loader", MiniCssExtractPlugin.loader, "css-loader", "postcss-loader", "sass-loader"]
+        use:  [MiniCssExtractor.loader, "css-loader", "postcss-loader", "sass-loader"]
       }
     ]
   },
@@ -36,7 +36,7 @@ module.exports = {
       moment: "moment"
     }),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/), // Ignore all locale files of moment.js
-    new MiniCssExtractPlugin({
+    new MiniCssExtractor({
       filename: "style.css",
     })
   ]
