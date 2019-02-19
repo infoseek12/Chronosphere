@@ -266,7 +266,7 @@ L.TileLayer.BoundaryCanvas = L.TileLayer.extend({
 });
 
 L.TileLayer.boundaryCanvas = function boundaryCanvas(url, options) {
-  return new L.TileLayer.BoundaryCanvas(url, options);
+  return new L.TileLayer.BoundaryCanvas(url, options).on('load', () => {});
 };
 
 const displayNightImagery = () => {
@@ -278,29 +278,23 @@ const displayNightImagery = () => {
   ).addTo(chronoSphere.map);
 };
 
-const updateTerminator = () => {
-  const oldLayer = chronoSphere.nightTimeMap;
-  let tileLoadCounter = 0;
+const updateTerminatorReq = () => requestAnimationFrame(updateTerminator);
 
-  const deleteLayer = () => {
-    tileLoadCounter += 1;
-    if (tileLoadCounter === 14) {
-      setTimeout(() => {
-        chronoSphere.map.removeLayer(oldLayer);
-      }, 250);
-    }
-  };
+const updateTerminator = () => {
+  let oldLayer = chronoSphere.nightTimeMap;
+
+  chronoSphere.map.on('layeradd', () => {
+    setTimeout(() => chronoSphere.map.removeLayer(oldLayer), 100);
+  });
 
   chronoSphere.nightTimeMap = L.TileLayer.boundaryCanvas(
     'https://api.mapbox.com/styles/v1/infoseek/cjf4g08rk19me2sp368t2lhvg/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaW5mb3NlZWsiLCJhIjoiY2pkajV6OXFtMWpqaDMzcGdyaGh6cjJ2NiJ9.ARSABTSiSWmuSQA2fbpzUw',
     {
       boundary: computeTerminator({ time: chronoSphere.currentTime.add(chronoSphere.mapTime) })
     }
-  )
-    .addTo(chronoSphere.map)
-    .on('tileload', deleteLayer);
+  ).addTo(chronoSphere.map);
 };
 
 chronoSphere.addInitFunction(displayNightImagery);
 
-chronoSphere.addUpdateFunction(updateTerminator);
+chronoSphere.addUpdateFunction(updateTerminatorReq);

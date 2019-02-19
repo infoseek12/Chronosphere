@@ -24,5 +24,6 @@ chronoSphere.map = new L.Map('map', {
 });
 
 L.tileLayer(
-  'https://api.mapbox.com/styles/v1/infoseek/cjdw9ibdb3po22tk4fndz0ke5/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaW5mb3NlZWsiLCJhIjoiY2pkajV6OXFtMWpqaDMzcGdyaGh6cjJ2NiJ9.ARSABTSiSWmuSQA2fbpzUw'
+  'https://api.mapbox.com/styles/v1/infoseek/cjdw9ibdb3po22tk4fndz0ke5/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaW5mb3NlZWsiLCJhIjoiY2pkajV6OXFtMWpqaDMzcGdyaGh6cjJ2NiJ9.ARSABTSiSWmuSQA2fbpzUw',
+  { attribution: 'Mapbox©' }
 ).addTo(chronoSphere.map);
