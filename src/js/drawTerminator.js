@@ -1,4 +1,21 @@
-// calculates erminator and day/night regions on a Leaflet map
+//Utility functions for time conversion
+const getJulian = function(timeConvert) {
+  /* Calculate the present UTC Julian Date. Function is valid after
+   * the beginning of the UNIX epoch 1970-01-01 and ignores leap
+   * seconds. */
+  return timeConvert / 86400000 + 2440587.5;
+};
+
+const getGMST = function(timeConvert) {
+  // Calculate Greenwich Mean Sidereal Time according to
+  // http://aa.usno.navy.mil/faq/docs/GAST.php
+  let julianDay = getJulian(timeConvert);
+  let d = julianDay - 2451545.0;
+  // Low precision equation is good enough for our purposes.
+  return (18.697374558 + 24.06570982441908 * d) % 24;
+};
+
+// calculates terminator and day/night regions on a Leaflet map
 const terminator = L.Polygon.extend({
   initialize: function initialize(time) {
     this._R2D = 180 / Math.PI;
@@ -75,8 +92,8 @@ const terminator = L.Polygon.extend({
 
   _compute: function _compute(time) {
     const today = new Date(time);
-    const julianDay = today.getJulian();
-    const gst = today.getGMST();
+    const julianDay = getJulian(today);
+    const gst = getGMST(today);
 
     const sunEclPos = this._sunEclipticPosition(julianDay);
     const eclObliq = this._eclipticObliquity(julianDay);
@@ -278,10 +295,8 @@ const displayNightImagery = () => {
   ).addTo(chronoSphere.map);
 };
 
-const updateTerminatorReq = () => requestAnimationFrame(updateTerminator);
-
 const updateTerminator = () => {
-  let oldLayer = chronoSphere.nightTimeMap;
+  const oldLayer = chronoSphere.nightTimeMap;
 
   chronoSphere.map.on('layeradd', () => {
     setTimeout(() => chronoSphere.map.removeLayer(oldLayer), 100);
@@ -294,6 +309,8 @@ const updateTerminator = () => {
     }
   ).addTo(chronoSphere.map);
 };
+
+const updateTerminatorReq = () => requestAnimationFrame(updateTerminator);
 
 chronoSphere.addInitFunction(displayNightImagery);
 

@@ -12,31 +12,15 @@ http://www.planetaryorbits.com/tutorial-javascript-orbit-simulation.html
 //You can verify this simulation with this NASA website:
 //http://space.jpl.nasa.gov/
 //NOTE: The First Point of Aries in the NASA simulation is due north!
-let newdd,
-  newmm,
-  newyyyy,
-  aGen,
-  eGen,
-  iGen,
-  WGen,
-  wGen,
-  LGen,
-  MGen,
-  EGen,
-  trueAnomalyArgGen,
-  K,
-  nGen,
-  rGen,
-  xGen,
-  yGen,
-  zGen,
-  i,
-  m;
+let aGen, eGen, iGen, WGen, wGen, LGen, MGen, EGen, trueAnomalyArgGen, K, nGen, rGen, xGen, yGen;
+
 let offsetX, offsetY;
 let planetNames = [];
-let offsetPlanetsX = 35;
+const offsetPlanetsX = 35;
 
-let T6 = {
+const toRadians_T6 = deg => deg * (Math.PI / 180);
+
+const T6 = {
   //Define background canvas
   canvasbackground: document.getElementById('LAYER_BACKGROUND_T6'), //Grab the HTML5 Background Canvas (will only be drawn once)
   contextbackground: null,
@@ -123,9 +107,53 @@ let T6 = {
 };
 
 function findOffset() {
-  var BB = T6.canvasforeground.getBoundingClientRect();
+  const BB = T6.canvasforeground.getBoundingClientRect();
   offsetX = BB.left;
   offsetY = BB.top;
+}
+
+function displayToolTip(e) {
+  e.preventDefault();
+  e.stopPropagation();
+
+  const canvasTXT = T6.canvasforeground.getContext('2d');
+  canvasTXT.fillStyle = '#f7f4ef';
+  canvasTXT.font = "17px 'Open Sans'";
+
+  const mouseX = parseInt(e.clientX - offsetX, 10);
+  const mouseY = parseInt(e.clientY - offsetY, 10);
+
+  renderForeground_T6();
+
+  for (let i = 0; i < planetNames.length; i++) {
+    const h = planetNames[i];
+    const dx = mouseX - h.x;
+    const dy = mouseY - h.y;
+    const adjustedX = h.x + 2 + h.radius;
+    let adjustedY = h.y + 0 + h.radius * 0.9;
+    const sunX = T6.width / 2 + 6 - offsetPlanetsX;
+    const sunY = T6.height / 2 + 10;
+
+    if (dx * dx + dy * dy < h.radius * h.radius) {
+      if (
+        sunX - 50 < adjustedX &&
+        adjustedX < sunX + 0 &&
+        sunY - 20 < adjustedY &&
+        adjustedY < sunY
+      )
+        adjustedY -= 18;
+
+      if (
+        sunX - 50 < adjustedX &&
+        adjustedX < sunX + 0 &&
+        sunY < adjustedY &&
+        adjustedY < sunY + 20
+      )
+        adjustedY += 18;
+
+      canvasTXT.fillText(h.name, adjustedX, adjustedY);
+    }
+  }
 }
 
 function initPlanets() {
@@ -273,8 +301,8 @@ function renderForeground_T6() {
   ];
 
   const load = () => {
-    let c = document.getElementById('LAYER_FOREGROUND_T6');
-    let ctx = c.getContext('2d');
+    const c = document.getElementById('LAYER_FOREGROUND_T6');
+    const ctx = c.getContext('2d');
     planetNames = [];
 
     for (let i = 0; i < planetLoc.length; i++) {
@@ -284,7 +312,7 @@ function renderForeground_T6() {
         y: planetLoc[i].y,
         radius: planetLoc[i].radius
       });
-      let img = document.getElementById(planetLoc[i].id);
+      const img = document.getElementById(planetLoc[i].id);
       ctx.drawImage(
         img,
         planetLoc[i].x - offsetPlanetsX,
@@ -300,10 +328,9 @@ function renderForeground_T6() {
 }
 
 function getJulianDate_T6(Year, Month, Day) {
-  let inputDate = new Date(Year, Month, Math.floor(Day));
-  let switchDate = new Date('1582', '10', '15');
-
-  let isGregorianDate = inputDate >= switchDate;
+  const inputDate = new Date(Year, Month, Math.floor(Day));
+  const switchDate = new Date('1582', '10', '15');
+  const isGregorianDate = inputDate >= switchDate;
 
   //Adjust if B.C.
   if (Year < 0) {
@@ -311,7 +338,7 @@ function getJulianDate_T6(Year, Month, Day) {
   }
 
   //Adjust if JAN or FEB
-  if (Month == 1 || Month == 2) {
+  if (Month === 1 || Month === 2) {
     Year = Year - 1;
     Month = Month + 12;
   }
@@ -430,84 +457,34 @@ function plotPlanet_T6(TGen, planetNumber) {
 //Used to solve for E
 function EccAnom_T6(ec, m, dp) {
   // arguments:
-  // ec=eccentricity, m=mean anomaly,
+  // ec=eccentricity, m AND mAdj=mean anomaly,
   // dp=number of decimal places
 
-  let pi = Math.PI,
-    K = pi / 180.0;
-  let maxIter = 30,
+  const pi = Math.PI,
+    K = pi / 180.0,
+    maxIter = 30,
+    delta = Math.pow(10, -dp);
+  let E,
+    F,
     i = 0;
-  let delta = Math.pow(10, -dp);
-  let E, F;
 
-  m = m / 360.0;
-  m = 2.0 * pi * (m - Math.floor(m));
+  let mAdj = m / 360.0;
+  mAdj = 2.0 * pi * (mAdj - Math.floor(mAdj));
 
-  if (ec < 0.8) E = m;
+  if (ec < 0.8) E = mAdj;
   else E = pi;
 
-  F = E - ec * Math.sin(m) - m;
+  F = E - ec * Math.sin(mAdj) - mAdj;
 
   while (Math.abs(F) > delta && i < maxIter) {
     E = E - F / (1.0 - ec * Math.cos(E));
-    F = E - ec * Math.sin(E) - m;
-    i = i + 1;
+    F = E - ec * Math.sin(E) - mAdj;
+    i++;
   }
 
   E = E / K;
 
   return Math.round(E * Math.pow(10, dp)) / Math.pow(10, dp);
-}
-
-function toRadians_T6(deg) {
-  return deg * (Math.PI / 180);
-}
-
-function round_T6(value, decimals) {
-  return Number(Math.round(value + 'e' + decimals) + 'e-' + decimals);
-}
-
-function displayToolTip(e) {
-  e.preventDefault();
-  e.stopPropagation();
-
-  let canvasTXT = T6.canvasforeground.getContext('2d');
-  canvasTXT.fillStyle = '#f7f4ef';
-  canvasTXT.font = "17px 'Open Sans'";
-
-  let mouseX = parseInt(e.clientX - offsetX);
-  let mouseY = parseInt(e.clientY - offsetY);
-
-  renderForeground_T6();
-
-  for (let i = 0; i < planetNames.length; i++) {
-    let h = planetNames[i];
-    let dx = mouseX - h.x;
-    let dy = mouseY - h.y;
-    let adjustedX = h.x + 2 + h.radius;
-    let adjustedY = h.y + 0 + h.radius * 0.9;
-    let sunX = T6.width / 2 + 6 - offsetPlanetsX;
-    let sunY = T6.height / 2 + 10;
-
-    if (dx * dx + dy * dy < h.radius * h.radius) {
-      if (
-        sunX - 50 < adjustedX &&
-        adjustedX < sunX + 0 &&
-        sunY - 20 < adjustedY &&
-        adjustedY < sunY
-      )
-        adjustedY -= 18;
-      if (
-        sunX - 50 < adjustedX &&
-        adjustedX < sunX + 0 &&
-        sunY < adjustedY &&
-        adjustedY < sunY + 20
-      )
-        adjustedY += 18;
-
-      canvasTXT.fillText(h.name, adjustedX, adjustedY);
-    }
-  }
 }
 
 chronoSphere.addInitFunction(initPlanets);

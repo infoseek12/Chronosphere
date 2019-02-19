@@ -9,11 +9,10 @@ Code taken from various opensource projects are combined, and to varying degrees
 I believe it makes sense to keep all the widgets containerized and not to share dependencies (for things like astronomical calculations) as the additional code is minimal, doing so avoids race conditions, and it allows for more flexible configuration.
 
 ## Known Inaccuracies
-The timezone selector is sometimes off in some timezones, due to daylight savings time not being factored in yet.
-
-The solar terminator is not sized correctly at all zoom levels, the gradient is off, and there are sometimes seams between the map tiles.
-
-The size of the planets is not proportioned accurately, nor are their orbits. This inaccuracy is intentional: it is impossible to display the correct proportions on any reasonably available screen.
+*The timezone selector is sometimes off in some timezones, due to daylight savings time not being factored in yet.
+*The solar terminator is not sized correctly at all zoom levels, the gradient is off, and there are sometimes seams between the map tiles.
+*If the time is updated too rapidly the moon and planet calculations become skewed.
+*The size of the planets is not proportioned accurately, nor are their orbits. This inaccuracy is intentional: it is impossible to display the correct proportions on any reasonably available screen.
 
 ## Build Steps
 1. Run "npm install" in shell to download the Node packages
